@@ -27,3 +27,7 @@ Com este projeto, aprendi a:
 - Criar views para manipular os dados
 - Criar templates para exibir os dados
 - Usar o sistema de roteamento de URLs do Django
+
+##
+
+![img](/crudsimples.png)
