@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'cadastrar_pessoa/style.css' %}">
+    <title>Cadastrar Pessoa</title>
+</head>
+<body>
+    <h1>Cadastrar Pessoa</h1>
+    <hr>
+    <form action="{% url 'cadastrar_pessoa' %}" method="post"> {% csrf_token %}
+        <label for="nome">NOME:</label>
+        <input type="text" name="nome" id="nome" required autocomplete="off">
+        <label for="email">EMAIL:</label>
+        <input type="email" name="email" id="email" required autocomplete="off">
+        <button type="submit" id="botao_cadastrar">CADASTRAR!</button>
+    </form>
+    <hr>
+    <table>
+        <tr>
+            <th>NOME</th>
+            <th>EMAIL</th>
+            <th>EDITAR</th>
+            <th>DELETAR</th>
+        </tr>
+        {% for i in pessoas %}
+            <tr>
+                <form action="{% url 'editar_pessoa' i.id %}" method="post"> {% csrf_token %}
+                    <td><input type="text" name="nome" id="nome" required autocomplete="off" value="{{ i.nome }}"></td>
+                    <td><input type="email" name="email" id="email" required autocomplete="off" value="{{ i.email}}"></td>
+                    <td><button type="submit" id="botao_editar">EDITAR</button></td>
+                    <td><a href="{% url 'deletar_pessoa' i.id %}"><button id="botao_deletar">DELETAR</button></a></td>
+                </form>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
